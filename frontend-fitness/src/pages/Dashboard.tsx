@@ -17,19 +17,6 @@ const Dashboard = () => {
   const [getAllWorkoutsAPICall, { isLoading }] = useGetAllWorkoutsMutation();
 
   const fetchWorkouts = async () => {
-    // const url = `${VITE_API_BASE_URL}/api/workouts`;
-    // try {
-    //   const response = await fetch(url, {
-    //     headers: {},
-    //   });
-    //   const workoutData = await response.json();
-    //   if (response.ok) {
-    //     setWorkouts(workoutData);
-    //     // console.log(`data: `, workoutData);
-    //   }
-    // } catch (error) {
-    //   console.log(error);
-    // }
     try {
       const res = await getAllWorkoutsAPICall().unwrap();
       setWorkouts(res);

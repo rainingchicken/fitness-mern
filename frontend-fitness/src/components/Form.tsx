@@ -1,5 +1,6 @@
 import { FormEvent, useState } from "react";
 const VITE_API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+import { useCreateWorkoutMutation } from "../slices/workoutSlice.js";
 
 const Form = () => {
   const [workout, setWorkout] = useState({
@@ -8,6 +9,8 @@ const Form = () => {
     load: 0,
   });
   const [error, setError] = useState<string | null>(null);
+
+  const [createWorkoutAPICall, { isLoading }] = useCreateWorkoutMutation();
 
   const handleTitleChange = (e: FormEvent) => {
     setWorkout((state) => ({
@@ -28,29 +31,18 @@ const Form = () => {
     }));
   };
 
-  const handleSubmit = async () => {
-    // e.preventDefault();
+  const handleSubmit = async (e: FormEvent) => {
+    e.preventDefault();
     const newWorkout = {
       title: workout.title,
       reps: workout.reps,
       load: workout.load,
     };
-    const response = await fetch(`${VITE_API_BASE_URL}/api/workouts`, {
-      method: "POST",
-      body: JSON.stringify(newWorkout),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-
-    const data = await response.json();
-    if (!response.ok) {
-      setError(data.error);
-    } else {
-      setWorkout(newWorkout);
-      setError(null);
-
-      console.log("added!");
+    console.log("submitted");
+    try {
+      await createWorkoutAPICall(newWorkout).unwrap();
+    } catch (error) {
+      console.log(error);
     }
   };
 

@@ -9,7 +9,25 @@ export const workoutsApiSlice = apiSlice.injectEndpoints({
         method: "GET",
       }),
     }),
+    createWorkout: builder.mutation({
+      query: (data) => ({
+        url: `${WORKOUT_URL}`,
+        method: "POST",
+        body: data,
+      }),
+    }),
+    deleteWorkout: builder.mutation({
+      query: (data) => ({
+        url: `${WORKOUT_URL}/${data}`,
+        method: "DELETE",
+        body: data,
+      }),
+    }),
   }),
 });
 
-export const { useGetAllWorkoutsMutation } = workoutsApiSlice;
+export const {
+  useGetAllWorkoutsMutation,
+  useCreateWorkoutMutation,
+  useDeleteWorkoutMutation,
+} = workoutsApiSlice;
