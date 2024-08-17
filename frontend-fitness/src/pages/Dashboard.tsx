@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import IWorkout from "../interfaces";
 import Workout from "../components/Workout";
 import Form from "../components/Form";
-import { useGetAllWorkoutsMutation } from "../slices/workoutSlice.js";
+import { useGetAllWorkoutsMutation } from "../slices/workoutSlice.tsx";
 
 const Dashboard = () => {
   const [workouts, setWorkouts] = useState<null | Array<IWorkout>>(null);
@@ -11,7 +11,7 @@ const Dashboard = () => {
 
   const fetchWorkouts = async () => {
     try {
-      const res = await getAllWorkoutsAPICall().unwrap();
+      const res = await getAllWorkoutsAPICall(null).unwrap();
       setWorkouts(res);
     } catch (err) {
       console.log(err);

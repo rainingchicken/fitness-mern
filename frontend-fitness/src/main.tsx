@@ -11,7 +11,7 @@ import {
 import Home from "./pages/Home.tsx";
 import Dashboard from "./pages/Dashboard.tsx";
 import { Provider } from "react-redux";
-import store from "./store";
+import store from "./store.tsx";
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<App />}>

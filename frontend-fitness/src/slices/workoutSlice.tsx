@@ -1,5 +1,11 @@
-import { apiSlice } from "./apiSlice";
+import { apiSlice } from "./apiSlice.tsx";
 const WORKOUT_URL = import.meta.env.VITE_WORKOUT_URL;
+
+interface IcreateWorkout {
+  title: string;
+  reps: number;
+  load: number;
+}
 
 export const workoutsApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
@@ -10,14 +16,14 @@ export const workoutsApiSlice = apiSlice.injectEndpoints({
       }),
     }),
     createWorkout: builder.mutation({
-      query: (data) => ({
+      query: (data: IcreateWorkout) => ({
         url: `${WORKOUT_URL}`,
         method: "POST",
         body: data,
       }),
     }),
     deleteWorkout: builder.mutation({
-      query: (data) => ({
+      query: (data: string) => ({
         url: `${WORKOUT_URL}/${data}`,
         method: "DELETE",
         body: data,

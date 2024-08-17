@@ -1,5 +1,5 @@
 import { FormEvent, useState } from "react";
-import { useCreateWorkoutMutation } from "../slices/workoutSlice.js";
+import { useCreateWorkoutMutation } from "../slices/workoutSlice.tsx";
 
 const Form = () => {
   const [workout, setWorkout] = useState({
