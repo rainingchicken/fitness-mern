@@ -23,7 +23,7 @@ export const workoutsApiSlice = apiSlice.injectEndpoints({
       }),
     }),
     deleteWorkout: builder.mutation({
-      query: (data: string) => ({
+      query: (data) => ({
         url: `${WORKOUT_URL}/${data}`,
         method: "DELETE",
         body: data,

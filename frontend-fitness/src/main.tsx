@@ -12,11 +12,20 @@ import Home from "./pages/Home.tsx";
 import Dashboard from "./pages/Dashboard.tsx";
 import { Provider } from "react-redux";
 import store from "./store.tsx";
+import PrivateRoute from "./components/PrivateRoute.tsx";
+import Login from "./pages/Login.tsx";
+import Logout from "./pages/Logout.tsx";
+import Signup from "./pages/Signup.tsx";
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<App />}>
       <Route index={true} path="/" element={<Home />} />
-      <Route path="/dashboard" element={<Dashboard />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/signup" element={<Signup />} />
+      <Route path="/logout" element={<Logout />} />
+      <Route path="" element={<PrivateRoute />}>
+        <Route path="/dashboard" element={<Dashboard />} />
+      </Route>
     </Route>
   )
 );
