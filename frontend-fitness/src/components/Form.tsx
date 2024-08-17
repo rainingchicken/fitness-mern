@@ -1,5 +1,4 @@
 import { FormEvent, useState } from "react";
-const VITE_API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 import { useCreateWorkoutMutation } from "../slices/workoutSlice.js";
 
 const Form = () => {
@@ -10,7 +9,7 @@ const Form = () => {
   });
   const [error, setError] = useState<string | null>(null);
 
-  const [createWorkoutAPICall, { isLoading }] = useCreateWorkoutMutation();
+  const [createWorkoutAPICall] = useCreateWorkoutMutation();
 
   const handleTitleChange = (e: FormEvent) => {
     setWorkout((state) => ({
@@ -40,8 +39,13 @@ const Form = () => {
     };
     console.log("submitted");
     try {
-      await createWorkoutAPICall(newWorkout).unwrap();
+      const res = await createWorkoutAPICall(newWorkout).unwrap();
+      // console.log(res);
+      setWorkout(res);
+
+      // setWorkout(res.json());
     } catch (error) {
+      setError("Cant submit");
       console.log(error);
     }
   };
