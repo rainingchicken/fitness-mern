@@ -2,7 +2,8 @@ import asyncHandler from "express-async-handler";
 import Workout from "../models/workoutModel.js";
 
 const getAllWorkouts = asyncHandler(async (req, res) => {
-  //   res.json({ message: "GET all workouts" });
+  // res.json({ message: "GET all workouts" });
+  // const user_id = req.user._id;
 
   try {
     const allWorkouts = await Workout.find({}).sort({ createdAt: -1 });
@@ -25,10 +26,11 @@ const getWorkout = asyncHandler(async (req, res) => {
 
 const createWorkout = asyncHandler(async (req, res) => {
   //   res.json({ message: "POST new workout" });
-  const { title, reps, load } = req.body;
+  const { title, reps, load, user } = req.body;
   // console.log(req.body);
   try {
-    const newWorkout = await Workout.create({ title, reps, load });
+    // const user_id = req.user._id;
+    const newWorkout = await Workout.create({ title, reps, load, user });
     res.status(200).json(newWorkout);
   } catch (error) {
     res.status(404).json({ error: error.message });

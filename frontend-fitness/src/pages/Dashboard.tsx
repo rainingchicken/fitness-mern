@@ -13,6 +13,7 @@ const Dashboard = () => {
     try {
       const res = await getAllWorkoutsAPICall(null).unwrap();
       setWorkouts(res);
+      console.log(res);
     } catch (err) {
       console.log(err);
     }
