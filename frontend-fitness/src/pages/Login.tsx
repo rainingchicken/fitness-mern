@@ -53,13 +53,13 @@ const Login = () => {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-
-        {isLoading && <h1>Loading...</h1>}
-
-        <button type="submit">Sign In</button>
+        <button disabled={isLoading} type="submit">
+          Sign In
+        </button>
         <p>
           New Customer? <Link to="/signup">Register</Link>
         </p>
+        {isLoading && <h1>Loading...</h1>}
       </form>
     </>
   );
