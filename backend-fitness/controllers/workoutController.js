@@ -1,10 +1,11 @@
 import asyncHandler from "express-async-handler";
 import Workout from "../models/workoutModel.js";
+import User from "../models/userModel.js";
 
 const getAllWorkouts = asyncHandler(async (req, res) => {
   // res.json({ message: "GET all workouts" });
   const user = req.user.id;
-
+  console.log(user);
   try {
     const allWorkouts = await Workout.find({ user }).sort({ createdAt: -1 });
     res.status(200).json(allWorkouts);
@@ -27,9 +28,9 @@ const getWorkout = asyncHandler(async (req, res) => {
 const createWorkout = asyncHandler(async (req, res) => {
   //   res.json({ message: "POST new workout" });
   const { title, reps, load } = req.body;
+  const user = req.user.id;
   // console.log(req.body);
   try {
-    const user = req.user.id;
     const newWorkout = await Workout.create({ title, reps, load, user });
     res.status(200).json(newWorkout);
   } catch (error) {
@@ -41,6 +42,16 @@ const updateWorkout = asyncHandler(async (req, res) => {
   //   res.json({ message: "PATCH this workout" });
   const _id = req.params;
   try {
+    const user = await User.findById(req.user.id);
+
+    //check for user
+    if (!user) {
+      res.status(401);
+      throw new Error("User not found");
+    }
+
+    console.log(req.user, user.id);
+
     const updatedWorkout = await Workout.findByIdAndUpdate(_id, req.body);
     res.status(200).json(updatedWorkout);
   } catch (error) {
