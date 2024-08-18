@@ -1,7 +1,10 @@
 import { FormEvent, useState } from "react";
 import { useCreateWorkoutMutation } from "../slices/workoutSlice.tsx";
+import { useSelector } from "react-redux";
 
 const Form = () => {
+  const { userInfo } = useSelector((state: any) => state.auth);
+
   const [workout, setWorkout] = useState({
     title: "",
     reps: 0,
@@ -36,11 +39,12 @@ const Form = () => {
       title: workout.title,
       reps: workout.reps,
       load: workout.load,
+      user: userInfo,
     };
     console.log("submitted");
     try {
       const res = await createWorkoutAPICall(newWorkout).unwrap();
-      // console.log(res);
+      console.log(res);
       setWorkout(res);
 
       // setWorkout(res.json());

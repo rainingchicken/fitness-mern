@@ -7,11 +7,12 @@ import {
   updateWorkout,
   deleteWorkout,
 } from "../controllers/workoutController.js";
+import { protect } from "../middleware/authMiddleware.js";
 
 router.get("/", getAllWorkouts);
 router.get("/:_id", getWorkout);
-router.post("/", createWorkout);
-router.patch("/:_id", updateWorkout);
-router.delete("/:_id", deleteWorkout);
+router.post("/", protect, createWorkout);
+router.patch("/:_id", protect, updateWorkout);
+router.delete("/:_id", protect, deleteWorkout);
 
 export default router;
