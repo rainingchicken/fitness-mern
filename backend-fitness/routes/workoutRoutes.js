@@ -9,7 +9,7 @@ import {
 } from "../controllers/workoutController.js";
 import { protect } from "../middleware/authMiddleware.js";
 
-router.get("/", protect, getAllWorkouts);
+router.get("/", getAllWorkouts);
 router.get("/:_id", protect, getWorkout);
 router.post("/", protect, createWorkout);
 router.patch("/:_id", protect, updateWorkout);

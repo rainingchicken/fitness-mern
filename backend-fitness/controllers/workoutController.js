@@ -7,7 +7,7 @@ const getAllWorkouts = asyncHandler(async (req, res) => {
   const user = req.user.id;
   console.log(user);
   try {
-    const allWorkouts = await Workout.find({ user }).sort({ createdAt: -1 });
+    const allWorkouts = await Workout.find({}).sort({ createdAt: -1 });
     res.status(200).json(allWorkouts);
   } catch (error) {
     res.status(404).json({ error: `Something went wrong ${error.message}` });
