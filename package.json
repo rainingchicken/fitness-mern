@@ -5,8 +5,11 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js",
-    "server": "nodemon server.js"
+    "start": "node backend-fitness/server.js",
+    "server": "nodemon backend-fitness/server.js",
+    "client": "npm run dev --prefix frontend-fitness",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "build": "npm install --prefix frontend-fitness --production=false && cd /opt/render/project/src/frontend-fitness && npm run build"
   },
   "keywords": [],
   "author": "",
@@ -14,6 +17,7 @@
   "description": "",
   "dependencies": {
     "bcryptjs": "^2.4.3",
+    "concurrently": "^8.2.2",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",

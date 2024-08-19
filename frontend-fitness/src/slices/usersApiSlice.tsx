@@ -1,31 +1,30 @@
 import { apiSlice } from "./apiSlice";
-const USER_URL = import.meta.env.VITE_USER_URL;
 
 export const usersApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     login: builder.mutation({
       query: (data) => ({
-        url: `${USER_URL}/login`,
+        url: `/api/user/login`,
         method: "POST",
         body: data,
       }),
     }),
     signup: builder.mutation({
       query: (data) => ({
-        url: `${USER_URL}/signup`,
+        url: `/api/user/signup`,
         method: "POST",
         body: data,
       }),
     }),
     logout: builder.mutation({
       query: () => ({
-        url: `${USER_URL}/logout`,
+        url: `/api/user/logout`,
         method: "POST",
       }),
     }),
     updateUser: builder.mutation({
       query: (data) => ({
-        url: `${USER_URL}/profile`,
+        url: `/api/user/profile`,
         method: "PUT",
         body: data,
       }),

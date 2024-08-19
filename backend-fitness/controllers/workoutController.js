@@ -5,9 +5,9 @@ import User from "../models/userModel.js";
 const getAllWorkouts = asyncHandler(async (req, res) => {
   // res.json({ message: "GET all workouts" });
   const user = req.user.id;
-  console.log(user);
+
   try {
-    const allWorkouts = await Workout.find({}).sort({ createdAt: -1 });
+    const allWorkouts = await Workout.find({ user }).sort({ createdAt: -1 });
     res.status(200).json(allWorkouts);
   } catch (error) {
     res.status(404).json({ error: `Something went wrong ${error.message}` });
@@ -50,7 +50,7 @@ const updateWorkout = asyncHandler(async (req, res) => {
       throw new Error("User not found");
     }
 
-    console.log(req.user, user.id);
+    // console.log(req.user, user.id);
 
     const updatedWorkout = await Workout.findByIdAndUpdate(_id, req.body);
     res.status(200).json(updatedWorkout);
