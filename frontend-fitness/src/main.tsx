@@ -16,6 +16,8 @@ import PrivateRoute from "./components/PrivateRoute.tsx";
 import Login from "./pages/Login.tsx";
 import Logout from "./pages/Logout.tsx";
 import Signup from "./pages/Signup.tsx";
+import Profile from "./pages/Profile.tsx";
+
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<App />}>
@@ -25,6 +27,7 @@ const router = createBrowserRouter(
       <Route path="/logout" element={<Logout />} />
       <Route path="" element={<PrivateRoute />}>
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/profile" element={<Profile />} />
       </Route>
     </Route>
   )

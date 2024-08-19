@@ -4,19 +4,23 @@ import { Link } from "react-router-dom";
 function Navbar() {
   const { userInfo } = useSelector((state: any) => state.auth);
   return (
-    <div>
-      <Link to="/">Home</Link>
+    <div className="navbar">
+      <span>
+        <Link to="/">Home</Link>
+      </span>
 
       {!userInfo ? (
-        <>
-          <Link to="/login">Login</Link>
-          <Link to="/signup">Signup</Link>
-        </>
+        <span>
+          <Link to="/login">Login</Link>{" "}
+          <Link to="/signup" className="button">
+            Signup
+          </Link>
+        </span>
       ) : (
-        <>
-          <Link to="/dashboard">Dasboard</Link>
-          <Link to="/logout">Logout</Link>
-        </>
+        <span>
+          <Link to="/dashboard">Dashboard</Link>{" "}
+          <Link to="/profile">Profile</Link> <Link to="/logout">Logout</Link>{" "}
+        </span>
       )}
     </div>
   );

@@ -1,90 +1,84 @@
 import { useState, useEffect, FormEvent } from "react";
-import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { useSignupMutation } from "../slices/usersApiSlice";
+import { useUpdateUserMutation } from "../slices/usersApiSlice";
 import { setCredentials } from "../slices/authSlice";
 
-const Signup = () => {
-  const [name, setName] = useState("");
+const Profile = () => {
   const [email, setEmail] = useState("");
+  const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
 
-  const navigate = useNavigate();
   const dispatch = useDispatch();
-
-  const [signup, { isLoading }] = useSignupMutation();
 
   const { userInfo } = useSelector((state: any) => state.auth);
 
+  const [updateProfile, { isLoading }] = useUpdateUserMutation();
+
   useEffect(() => {
-    if (userInfo) {
-      navigate("/");
-    }
-  }, [navigate, userInfo]);
+    setName(userInfo.name);
+    setEmail(userInfo.email);
+  }, [userInfo.email, userInfo.name]);
 
   const submitHandler = async (e: FormEvent) => {
     e.preventDefault();
-    // console.log("submit");
-    try {
-      const res = await signup({
-        name,
-        email,
-        password,
-        confirmPassword,
-      }).unwrap();
-      dispatch(setCredentials({ ...res }));
-      navigate("/dashboard");
-    } catch (err) {
-      console.log(err);
-      setError("Please fill all inputs");
+    if (password !== confirmPassword) {
+      setError("Passwords do not match");
+    } else {
+      try {
+        const res = await updateProfile({
+          _id: userInfo._id,
+          name,
+          email,
+          password,
+        }).unwrap();
+        dispatch(setCredentials(res));
+      } catch (err) {
+        setError("Cannot update profile");
+      }
     }
   };
 
   return (
     <>
-      <h1>Sign Up</h1>
+      <h1>Profile</h1>
       <form onSubmit={submitHandler}>
-        <label htmlFor="signupName">Name: </label>
+        <label htmlFor="profileName">Name: </label>
         <input
-          id="signupName"
+          id="profileName"
           type="text"
           placeholder="Enter name"
           value={name}
           onChange={(e) => setName(e.target.value)}
         />
-        <label htmlFor="signupEmail">Email Address: </label>
+        <label htmlFor="profileEmail">Email Address: </label>
         <input
-          id="signupEmail"
+          id="profileEmail"
           type="email"
           placeholder="Enter Email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
-
-        <label htmlFor="signupPassword">Password: </label>
+        <label htmlFor="profilePassword">Password: </label>
         <input
-          id="signupPassword"
+          id="profilePassword"
           type="password"
           placeholder="Enter password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <label htmlFor="signupConfirmPassword">Confirm Password: </label>
+        <label htmlFor="profileConfirmPassword">Confirm Password: </label>
         <input
-          id="signupConfirmPassword"
+          id="profileConfirmPassword"
           type="password"
           placeholder="Confirm password"
           value={confirmPassword}
           onChange={(e) => setConfirmPassword(e.target.value)}
         />
-        <button disabled={isLoading} type="submit">
-          Sign Up
+        <button className="button" disabled={isLoading} type="submit">
+          Update
         </button>
-        <p>
-          Alrady have an account? <Link to="/login">Login</Link>
-        </p>
         {isLoading && <h1>Loading...</h1>}
       </form>
       <p className="error">{error}</p>
@@ -92,4 +86,4 @@ const Signup = () => {
   );
 };
 
-export default Signup;
+export default Profile;

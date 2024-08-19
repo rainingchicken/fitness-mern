@@ -27,11 +27,11 @@ const getWorkout = asyncHandler(async (req, res) => {
 
 const createWorkout = asyncHandler(async (req, res) => {
   //   res.json({ message: "POST new workout" });
-  const { title, reps, load } = req.body;
+  const { title, sets, reps } = req.body;
   const user = req.user.id;
   // console.log(req.body);
   try {
-    const newWorkout = await Workout.create({ title, reps, load, user });
+    const newWorkout = await Workout.create({ title, sets, reps, user });
     res.status(200).json(newWorkout);
   } catch (error) {
     res.status(404).json({ error: error.message });

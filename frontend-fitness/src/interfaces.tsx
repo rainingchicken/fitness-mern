@@ -1,7 +1,7 @@
 interface IWorkout {
   _id: string;
   title: string;
-  load: number;
+  sets: number;
   reps: number;
   createdAt: number;
 }

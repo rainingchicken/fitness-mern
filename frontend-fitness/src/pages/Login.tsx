@@ -7,6 +7,7 @@ import { setCredentials } from "../slices/authSlice";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState<string | null>(null);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -27,40 +28,43 @@ const Login = () => {
     try {
       const res = await login({ email, password }).unwrap();
       dispatch(setCredentials({ ...res }));
-      navigate("/");
+      navigate("/dashboard");
     } catch (err) {
       console.log(err);
+      setError("Incorrect email or password");
     }
   };
 
   return (
     <>
-      <h1>Sign in</h1>
+      <h1>Login</h1>
       <form onSubmit={submitHandler}>
-        <label>Email Address</label>
-
+        <label htmlFor="loginEmail">Email Address: </label>
         <input
+          id="loginEmail"
           type="email"
           placeholder="Enter Email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
 
-        <label>Password</label>
+        <label htmlFor="loginPassword">Password: </label>
         <input
+          id="loginPassword"
           type="password"
           placeholder="Enter password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
         <button disabled={isLoading} type="submit">
-          Sign In
+          Log In
         </button>
         <p>
-          New Customer? <Link to="/signup">Register</Link>
+          New user? <Link to="/signup">Sign up</Link>
         </p>
         {isLoading && <h1>Loading...</h1>}
       </form>
+      <p className="error">{error}</p>
     </>
   );
 };

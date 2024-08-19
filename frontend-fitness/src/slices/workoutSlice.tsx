@@ -3,7 +3,7 @@ import { apiSlice } from "./apiSlice.tsx";
 interface IcreateWorkout {
   title: string;
   reps: number;
-  load: number;
+  sets: number;
 }
 
 export const workoutsApiSlice = apiSlice.injectEndpoints({
@@ -28,6 +28,13 @@ export const workoutsApiSlice = apiSlice.injectEndpoints({
         body: data,
       }),
     }),
+    updateWorkout: builder.mutation({
+      query: ({ id, data }) => ({
+        url: `/api/workouts/${id}`,
+        method: "PATCH",
+        body: data,
+      }),
+    }),
   }),
 });
 
@@ -35,4 +42,5 @@ export const {
   useGetAllWorkoutsMutation,
   useCreateWorkoutMutation,
   useDeleteWorkoutMutation,
+  useUpdateWorkoutMutation,
 } = workoutsApiSlice;

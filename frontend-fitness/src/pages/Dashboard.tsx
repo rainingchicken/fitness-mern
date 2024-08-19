@@ -13,7 +13,6 @@ const Dashboard = () => {
     try {
       const res = await getAllWorkoutsAPICall(null).unwrap();
       setWorkouts(res);
-      console.log(res);
     } catch (err) {
       console.log(err);
     }
@@ -40,7 +39,7 @@ const Dashboard = () => {
 
   return (
     <div>
-      <h1>Home</h1>
+      <h1>Dashboard</h1>
       <Form />
       <>{isLoading ? loading() : loaded()}</>
     </div>

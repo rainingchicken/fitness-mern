@@ -7,8 +7,8 @@ const Form = () => {
 
   const [workout, setWorkout] = useState({
     title: "",
+    sets: 1,
     reps: 0,
-    load: 0,
   });
   const [error, setError] = useState<string | null>(null);
 
@@ -26,19 +26,18 @@ const Form = () => {
       reps: +(e.target as HTMLInputElement).value,
     }));
   };
-  const handleLoadChange = (e: FormEvent) => {
+  const handleSetsChange = (e: FormEvent) => {
     setWorkout((state) => ({
       ...state,
-      load: +(e.target as HTMLInputElement).value,
+      sets: +(e.target as HTMLInputElement).value,
     }));
   };
 
-  const handleSubmit = async (e: FormEvent) => {
-    e.preventDefault();
+  const handleSubmit = async () => {
     const newWorkout = {
       title: workout.title,
+      sets: workout.sets,
       reps: workout.reps,
-      load: workout.load,
       user: userInfo,
     };
     console.log("submitted");
@@ -56,16 +55,16 @@ const Form = () => {
 
   return (
     <div>
-      <h1>Add New Workout Form</h1>
+      <h2>Add New Workout Form</h2>
       <form onSubmit={handleSubmit}>
-        <label htmlFor="workoutTitle">Workout Title</label>
+        <label htmlFor="workoutTitle">Workout Title: </label>
         <input id="workoutTitle" type="text" onChange={handleTitleChange} />
-        <label htmlFor="workoutReps">Reps</label>
+        <label htmlFor="workoutSets">Sets: </label>
+        <input id="workoutSets" type="number" onChange={handleSetsChange} />
+        <label htmlFor="workoutReps">Reps: </label>
         <input id="workoutReps" type="number" onChange={handleRepsChange} />
-        <label htmlFor="workoutLoad">Load</label>
-        <input id="workoutLoad" type="number" onChange={handleLoadChange} />
         <button type="submit">SUBMIT</button>
-        {error}
+        <p className="error">{error}</p>
       </form>
     </div>
   );

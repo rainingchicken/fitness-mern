@@ -23,7 +23,7 @@ const Logout = () => {
     logoutHandler();
   }, []);
 
-  return <div>You are logged out</div>;
+  return <h1>You are logged out</h1>;
 };
 
 export default Logout;
