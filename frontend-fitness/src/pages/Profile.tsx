@@ -38,6 +38,7 @@ const Profile = () => {
           password,
         }).unwrap();
         dispatch(setCredentials(res));
+        alert("Profile updated!");
       } catch (err) {
         setError("Cannot update profile");
       }
@@ -80,7 +81,7 @@ const Profile = () => {
           value={confirmPassword}
           onChange={(e) => setConfirmPassword(e.target.value)}
         />
-        <button className="button" disabled={isLoading} type="submit">
+        <button className="btn submitbtn" disabled={isLoading} type="submit">
           Update
         </button>
         {isLoading && <h1>Loading...</h1>}

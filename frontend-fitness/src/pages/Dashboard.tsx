@@ -47,8 +47,10 @@ const Dashboard = () => {
       {addMode ? (
         <Form setAddMode={setAddMode} />
       ) : (
-        <div className="addBtn">
-          <button onClick={handleAddbtn}>ADD WORKOUT</button>
+        <div className="addBtnDiv">
+          <button className="btn" onClick={handleAddbtn}>
+            ADD WORKOUT
+          </button>
         </div>
       )}
 

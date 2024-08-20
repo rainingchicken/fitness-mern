@@ -21,7 +21,7 @@ const Login = () => {
 
   useEffect(() => {
     if (userInfo) {
-      navigate("/");
+      navigate("/dashboard");
     }
   }, [navigate, userInfo]);
 
@@ -59,7 +59,7 @@ const Login = () => {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <button disabled={isLoading} type="submit">
+        <button className="btn submitbtn" disabled={isLoading} type="submit">
           Log In
         </button>
         <p>

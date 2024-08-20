@@ -82,11 +82,11 @@ const Signup = () => {
           value={confirmPassword}
           onChange={(e) => setConfirmPassword(e.target.value)}
         />
-        <button disabled={isLoading} type="submit">
+        <button className="btn submitbtn" disabled={isLoading} type="submit">
           Sign Up
         </button>
         <p>
-          Alrady have an account? <Link to="/login">Login</Link>
+          Already have an account?<Link to="/login">Login</Link>
         </p>
         {isLoading && <h1>Loading...</h1>}
       </form>
