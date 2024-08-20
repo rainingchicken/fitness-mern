@@ -4,8 +4,10 @@
 import { FormEvent, useState } from "react";
 import { useCreateWorkoutMutation } from "../slices/workoutSlice.tsx";
 import { useSelector } from "react-redux";
-
-const Form = () => {
+interface IParams {
+  setAddMode: Function;
+}
+const Form = ({ setAddMode }: IParams) => {
   const { userInfo } = useSelector((state: any) => state.auth);
 
   const [workout, setWorkout] = useState({
@@ -48,7 +50,7 @@ const Form = () => {
       const res = await createWorkoutAPICall(newWorkout).unwrap();
       console.log(res);
       setWorkout(res);
-
+      setAddMode(false);
       // setWorkout(res.json());
     } catch (error) {
       setError("Cant submit");

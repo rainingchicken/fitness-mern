@@ -19,7 +19,8 @@ function Navbar() {
       ) : (
         <span>
           <Link to="/dashboard">Dashboard</Link>{" "}
-          <Link to="/profile">Profile</Link> <Link to="/logout">Logout</Link>{" "}
+          <Link to="/profile">{userInfo.name}'s Profile</Link>{" "}
+          <Link to="/logout">Logout</Link>{" "}
         </span>
       )}
     </div>

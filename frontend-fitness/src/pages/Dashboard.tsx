@@ -6,7 +6,7 @@ import { useGetAllWorkoutsMutation } from "../slices/workoutSlice.tsx";
 
 const Dashboard = () => {
   const [workouts, setWorkouts] = useState<null | Array<IWorkout>>(null);
-
+  const [addMode, setAddMode] = useState(false);
   const [getAllWorkoutsAPICall, { isLoading }] = useGetAllWorkoutsMutation();
 
   const fetchWorkouts = async () => {
@@ -37,10 +37,21 @@ const Dashboard = () => {
     return <h1>Loading...</h1>;
   };
 
+  const handleAddbtn = () => {
+    setAddMode(true);
+  };
+
   return (
     <div>
       <h1>Dashboard</h1>
-      <Form />
+      {addMode ? (
+        <Form setAddMode={setAddMode} />
+      ) : (
+        <div className="addBtn">
+          <button onClick={handleAddbtn}>ADD WORKOUT</button>
+        </div>
+      )}
+
       <>{isLoading ? loading() : loaded()}</>
     </div>
   );
