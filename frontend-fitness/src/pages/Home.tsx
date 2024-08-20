@@ -1,7 +1,9 @@
+import Footer from "./Footer";
+
 const Home = () => {
   return (
     <div>
-      <h1>Daily Workout</h1>
+      <h1>Daily Warmup</h1>
       <ul>
         <li className="workout">
           <h1 className="workoutTitle">Bend and Reach</h1>
@@ -54,6 +56,7 @@ const Home = () => {
           <p className="reps">Reps: 10</p>
         </li>
       </ul>
+      <Footer />
     </div>
   );
 };

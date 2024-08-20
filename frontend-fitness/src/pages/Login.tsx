@@ -1,3 +1,6 @@
+// @desc    login page, creates token, checks user auth
+// @route   POST /api/users/login
+// @access  Private
 import { useState, useEffect, FormEvent } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";

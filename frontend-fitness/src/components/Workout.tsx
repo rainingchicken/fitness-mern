@@ -1,3 +1,7 @@
+// @desc   displays workout title, reps, sets, created time, delete, and edit button
+// @route   DELETE /api/workouts
+// @route   PATCH /api/workouts
+// @access  Private
 import { useState } from "react";
 import IWorkout from "../interfaces";
 import { useDeleteWorkoutMutation } from "../slices/workoutSlice.tsx";

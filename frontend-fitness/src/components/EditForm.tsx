@@ -1,3 +1,6 @@
+// @desc    editmode, update the clicked workout
+// @route   PATCH /api/workouts/:_id
+// @access  Private
 import { FormEvent, useState } from "react";
 import { useUpdateWorkoutMutation } from "../slices/workoutSlice.tsx";
 import { useSelector } from "react-redux";

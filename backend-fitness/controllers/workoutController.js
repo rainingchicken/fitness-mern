@@ -2,6 +2,9 @@ import asyncHandler from "express-async-handler";
 import Workout from "../models/workoutModel.js";
 import User from "../models/userModel.js";
 
+// @desc    get all of user's workouts
+// @route   GET /api/workouts
+// @access  Private
 const getAllWorkouts = asyncHandler(async (req, res) => {
   // res.json({ message: "GET all workouts" });
   const user = req.user.id;
@@ -14,6 +17,9 @@ const getAllWorkouts = asyncHandler(async (req, res) => {
   }
 });
 
+// @desc    get a workout
+// @route   GET /api/workouts/:_id
+// @access  Public
 const getWorkout = asyncHandler(async (req, res) => {
   //   res.json({ message: "GET this workout" });
   const _id = req.params;
@@ -25,6 +31,9 @@ const getWorkout = asyncHandler(async (req, res) => {
   }
 });
 
+// @desc   create a workout with user's _id
+// @route   POST /api/workouts
+// @access  Private
 const createWorkout = asyncHandler(async (req, res) => {
   //   res.json({ message: "POST new workout" });
   const { title, sets, reps } = req.body;
@@ -38,6 +47,9 @@ const createWorkout = asyncHandler(async (req, res) => {
   }
 });
 
+// @desc    update a workouts
+// @route   PATCH /api/workouts/_:id
+// @access  Private
 const updateWorkout = asyncHandler(async (req, res) => {
   //   res.json({ message: "PATCH this workout" });
   const _id = req.params;
@@ -59,6 +71,9 @@ const updateWorkout = asyncHandler(async (req, res) => {
   }
 });
 
+// @desc   delete workouts
+// @route   DELETE /api/workouts/:_id
+// @access  Private
 const deleteWorkout = asyncHandler(async (req, res) => {
   //   res.json({ message: "DELETE this workout" });
   const _id = req.params;

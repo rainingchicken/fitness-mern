@@ -1,3 +1,6 @@
+// @desc   createa a workout form
+// @route   POST /api/workouts
+// @access  Private
 import { FormEvent, useState } from "react";
 import { useCreateWorkoutMutation } from "../slices/workoutSlice.tsx";
 import { useSelector } from "react-redux";

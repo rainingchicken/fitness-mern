@@ -1,3 +1,7 @@
+// @desc    view or update profile, including email, passwords, name
+// @route   PUT /api/users/profile
+// @route   GET /api/users/profile
+// @access  Private
 import { useState, useEffect, FormEvent } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useUpdateUserMutation } from "../slices/usersApiSlice";
