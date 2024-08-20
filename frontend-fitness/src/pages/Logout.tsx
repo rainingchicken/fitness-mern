@@ -1,6 +1,6 @@
 // @desc    editmode, update the clicked workout
 // @route   GET /api/users/logout
-// @access  Private
+// @access  Public
 import { useDispatch } from "react-redux";
 import { useLogoutMutation } from "../slices/usersApiSlice";
 import { logout } from "../slices/authSlice";
